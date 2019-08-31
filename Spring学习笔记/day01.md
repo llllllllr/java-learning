@@ -246,7 +246,7 @@ demo1......校长
 
   
 
-  - [x] 注入对象类型的属性
+  - [x] **注入对象类型的属性**
 
     ```java
     /*
@@ -256,11 +256,103 @@ demo1......校长
     现在直接利用Spring的配置来完成这一个过程
     */
     
-    👉
+    👉UserService.class
+        //1.设置UserDaou对象
+    	UserDao userDao;
+    	//2.设置getter和setter方法以便在xml文件中使用set方法
+    	public UserDao getUserDao() {
+    		return userDao;
+    	}
+    	public void setUserDao(UserDao userDao) {
+    		this.userDao = userDao;
+    	}
+        //3.通过成员userDao调用UserDao里面封装的方法
+         public void add() {
+    		System.out.println("service.......");
+    		userDao.add();
+    	}
+    
+    👉bean.xml
+     <bean id =  "userdao" class="dao.UserDao">
+     </bean>
+     
+     <bean id="userservice" class="service.UserService">
+       <property name="userDao" ref="userdao"></property>
+     </bean>
+     
+     ⭐这里ref划重点
+     
+     👉测试
+     	@Test
+    	public void testUser() {
+    		//1.加载Sprign配置文件
+    		@SuppressWarnings("resource")
+    		ApplicationContext context = new                                                               ClassPathXmlApplicationContext("bean1.xml");
+    		//2.得到配置创建的对象
+    	   UserService userService = (UserService) context.getBean("userservice");
+    	   userService.add();
+    	}
+     
+    //结果：
+    service.......
+    dao.......
+     
+     
     ```
 
+- [x] **p名称空间注入**
+
+         ```java
+👉xml文件配置1
+xmlns:p="http://www.springframework.org/schema/p"
     
+/*
+p:名称空间
+userName:成员名字
+*/
+<bean id="user2" class="lllr.bean.User" p:userName="小张"></bean>
+         ```
 
-  
+- [x] **注入复杂类型的属性**
 
- 
+> - 数组类型
+> - List类型
+> - map类型
+> - properties类型
+>
+> 
+
+```xml
+<bean id="testusr" class="lllr.bean.User">
+  <property name="arrs">
+  <list>
+    <value>校长</value>
+    <value>小马</value>
+    <value>小王</value>
+    </list>
+  </property>
+   
+   <property name="list">
+   <list>
+   <value>zhanfs</value>
+   <value>lisi</value>
+   <value>wangwu</value>
+   </list>
+   </property>
+   
+   <property name="map">
+   <map>
+   <entry key="aa" value="1"></entry>
+   <entry key="bb" value="2"></entry>
+   </map>
+   </property>
+   
+   <property name="properties">
+   <props>
+    <prop key="userame">dasd</prop>
+    <prop key="dasd">asdasd</prop>
+   </props>
+   </property>
+ </bean>
+```
+
