@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>MicroMessage</display-name>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  <servlet-name>UpdateServlet</servlet-name>
+  <servlet-class>immoc.servlet.UpdateServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>UpdateServlet</servlet-name>
+  <url-pattern>/Auto/UpdateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  <servlet-name>UpdateJServlet</servlet-name>
+  <servlet-class>immoc.servlet.UpdateJServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>UpdateJServlet</servlet-name>
+  <url-pattern>/Auto/UpdateJServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  <servlet-name>DeleteBenchServlet</servlet-name>
+  <servlet-class>immoc.servlet.DeleteBenchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>DeleteBenchServlet</servlet-name>
+  <url-pattern>/Auto/DeleteBenchServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <servlet-name>FinalInsert</servlet-name>
+  <servlet-class>immoc.servlet.FinalInsert</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>FinalInsert</servlet-name>
+  <url-pattern>/Auto/FinalInsert</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>InsertOServlet</servlet-name>
+    <servlet-class>immoc.servlet.InsertOServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>InsertOServlet</servlet-name>
+  <url-pattern>/Auto/InsertOServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  <servlet-name>DeleteOneServlet</servlet-name>
+  <servlet-class>immoc.servlet.DeleteOServlet</servlet-class>
+  </servlet>
+<servlet-mapping>
+<servlet-name>DeleteOneServlet</servlet-name>
+<url-pattern>/Auto/DeleteOneServlet</url-pattern>
+</servlet-mapping>
+
+
+  <servlet>
+  <servlet-name>ListServlet</servlet-name>
+  <servlet-class>immoc.servlet.ListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>ListServlet</servlet-name>
+  <url-pattern>/Auto/ListServlet</url-pattern>
+  </servlet-mapping>
+  
+   <jsp-config>
+    <taglib>
+    <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+    <taglib-location>/WEB-INF/c.tld</taglib-location>
+    </taglib>
+    </jsp-config>
+    
+  </web-app>
+  

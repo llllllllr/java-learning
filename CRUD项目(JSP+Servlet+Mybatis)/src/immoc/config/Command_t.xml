@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Command">
+
+    <resultMap type="immoc.bean.Command"  id="Command">
+    <id column="C_ID" jdbcType="INTEGER" property="id"></id>
+    <result column ="name" jdbcType="VARCHAR" property="name"></result>
+     <result column="description" jdbcType="VARCHAR" property="description"/>
+    <collection property="contentList" resultMap="ContentMessage.ContentResult"></collection>
+    </resultMap>
+    
+    <!-- 查询 -->
+    <select id="queryCommand" parameterType="immoc.bean.Command" resultMap="Command">
+    select a.id C_ID,a.name,a.description,b.id,b.content
+    from command a left join command_content b
+    on a.id = b.command_id
+    <where>
+    <if test="name != null and !&quot;&quot;.equals(name.trim())">and a.name=#{name}</if>
+    </where>
+    </select>
+    
+    <!-- 插入 -->
+    <insert id="insertToCommand" parameterType="immoc.bean.Command">
+    insert into  Command (name,description) values 
+    (#{name},#{description})
+    </insert>
+    
+    
+    <!-- 删除单条-->
+    <delete id="deleteCommand" parameterType="int">
+    delete from command where id = #{_parameter}
+    </delete>
+    
+    <!-- 多条删除 -->
+    <delete id="deleteBench" parameterType="java.util.List">
+    delete from command where id in (
+    <foreach collection="list" item="item" separator=",">
+    #{item}
+    </foreach>
+    )
+    </delete>
+    
+    <!-- 修改数据 -->
+    <update id="updateCommand"  parameterType="immoc.bean.Command">
+    update command set name=#{name} , description=#{description}
+    where id=#{id}
+    </update>
+</mapper>

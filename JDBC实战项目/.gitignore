@@ -1,0 +1,4 @@
+*.jpg
+.project
+.classpath
+/bin
