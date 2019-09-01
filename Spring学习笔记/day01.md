@@ -18,7 +18,7 @@
 
 ### IOC
 
-🏃‍*IOC操作**
+🏃‍**IOC操作**
 
 1. IOC配置文件方式
 2. IOC注解方式
@@ -302,10 +302,15 @@ demo1......校长
 
 - [x] **p名称空间注入**
 
-         ```java
-👉xml文件配置1
-xmlns:p="http://www.springframework.org/schema/p"
-    
+     ```xml
+     👉xml文件配置1
+     xmlns:p="http://www.springframework.org/schema/p"
+     ```
+     
+
+
+
+         ```xml
 /*
 p:名称空间
 userName:成员名字
