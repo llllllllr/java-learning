@@ -2,7 +2,7 @@
 
 ### IOC
 
-> 控制反转，把对象创建叫给Spring管理
+> 控制反转，把对象创建交给Spring管理
 
 ### DI
 
@@ -234,4 +234,91 @@ order...........
   - 最终通知：在后置之后执行
   - 环绕通知：在方法之前和之后执行
 - **Aspect(切面）：把增强应用到具体方法上面的过程就称为切面。把增强用到切入点的过程**
+
+# Sring里面的AOP操作
+
+## AspectJ简介
+
+- 一个面向切面的框架，扩展了java语言，定义了AOP语法，所以它有一个专门的编译器来生成遵守java字节编码规范的class文件
+- 基于Java语言的AOP框架
+
+## 使用AspectJ实现AOP有两种方式
+
+- 基于xml配置
+- 基于注解方式
+
+🏃‍准备
+
+```
+1.导入jar包
+2.在xml文件中引入约束
+```
+
+🏃‍使用表达式配置切入点
+
+> 常用的表达式
+>
+> execution(<访问修饰符>?<返回类型><方法名>（<参数>）<异常>)
+>
+> - execution(* lllr.bean.Book.add(..))
+> - execution(* lllr.bean.Book.*(..))
+> - execution(* \*.\*(..))
+> - execution(* lllr.bean.Bo*(..))
+
+🏃‍实操
+
+```xml
+👉约束
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"> <!-- bean definitions here -->
+```
+
+
+
+```xml
+👉方法1（配置文件)
+
+<!-- 配置对象 -->
+<bean id="book" class="lllr.AOP.Book"></bean>
+<bean id="mybook" class="lllr.AOP.Mybook"></bean>
+
+<!-- 配置AOP -->
+<aop:config>
+	<!-- 配置切入点 -->
+	<aop:pointcut expression="execution(* lllr.AOP.Mybook.*(..))" id="pointcut1"/>
+	<!-- 配置切面 -->
+	<aop:aspect ref="mybook">
+	     <aop:before method="before" pointcut-ref="book"/>
+	</aop:aspect>
+</aop:config>
+
+
+👉方法2（注解）
+<!-- 配置对象 -->
+<bean id="book" class="lllr.AOP.Book"></bean>
+<bean id="mybook" class="lllr.AOP.Mybook"></bean>
+
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+@Aspect
+public class Mybook {
+
+   @Before(value="execution(* lllr.AOP.Mybook.*(..))")
+	public void before() {
+		
+		System.out.println("before add!...........");
+	}
+}
+
+<!-- 输出-->
+before add!...........
+add.......
+
+```
+
+
 
